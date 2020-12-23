@@ -1,0 +1,130 @@
+﻿@model PoyectoGuiasTuristicos.Models.AllModel
+@{
+    ViewBag.Title = "My Activity";
+}
+<body style="margin-top:200px">
+    <h2 class="text-center">MY ACTIVITY</h2>
+    <hr />
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-1"></div>
+            <div class="col-md-4 bg-white text-center" style="border:2px solid black;overflow-y:auto;height:500px">
+                <p class="title"> Routes </p>
+                <hr />
+                @if (@ViewData["noguiarutas"] != null)
+                {
+                    <h6 style="color:grey">@ViewData["noguiarutas"]</h6>
+                }
+                else
+                {
+                    foreach (var item in Model.RutaModel)
+                    {
+                        <div class="card">
+                            <h6>@item.lugar_quedada</h6>
+                            <p>Starting Date: @item.fechaInicio.ToString().Substring(0, 10)</p>
+                            <p>Starting hour: @item.fechaInicio.ToString().Substring(10)</p>
+                            <div class="buttons" style="display:inline">
+                                <a href="@Url.Action("Ruta", "Ruta", new { id = item.id })">
+                                    <button type="button" class="btn btn-dark">
+                                        Route <i class="fas fa-info-circle"></i>
+                                    </button>
+                                </a>
+                                <a href="@Url.Action("EditarRuta","Editar", new { id = item.id })">
+                                    <button type="button" class="btn btn-dark">
+                                        Modify <i class="fas fa-edit"></i>
+                                    </button>
+                                </a>
+                                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modalEliminarRuta">
+                                    Delete <i class="fas fa-trash-alt"></i>
+                                </button>
+                                <div class="modal fade" id="modalEliminarRuta" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">This route has @item.ReservaOrganizaRuta.Where(r => r.ruta_id == item.id).Select(r => r.id).Count() booking/s,are you sure, you want to delete this route?</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <a href="@Url.Action("EliminarRuta","Lista", new { id = item.id })">
+                                                    <button type="button" class="btn btn-danger">Delete route</button>
+                                                </a>
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    }
+                }
+                <a href="@Url.Action("CrearRuta", "Crear")">
+                    <button type="button" class="btn btn-dark">
+                        Create route <i class="fas fa-plus"></i>
+                    </button>
+                </a>
+            </div>
+            <div class="col-1"></div>
+            <div class="col-md-4 bg-white text-center" style="border:2px solid black;overflow-y:auto;height:500px">
+                <p class="title"> Museums</p>
+                <hr />
+                @if (@ViewData["noguiamuseo"] != null)
+                {
+                    <h6 style="color:grey">@ViewData["noguiamuseo"]</h6>
+                }
+                else
+                {
+                    foreach (var item in Model.MuseoModel)
+                    {
+                        <div class="card">
+                            <h6>@item.nombre</h6>
+                            <p>Starting Date: @item.fechaInicio.ToString().Substring(0, 10)</p>
+                            <p>Starting hour: @item.fechaInicio.ToString().Substring(10)</p>
+                            <div class="buttons" style="display:inline">
+                                <a href="@Url.Action("Museo", "Museo", new { id = item.id })">
+                                    <button type="button" class="btn btn-dark">
+                                        Museum <i class="fas fa-info-circle"></i>
+                                    </button>
+                                </a>
+                                <a href="@Url.Action("EditarMuseo","Editar", new { id = item.id })">
+                                    <button type="button" class="btn btn-dark">
+                                        Modify <i class="fas fa-edit"></i>
+                                    </button>
+                                </a>
+                                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modalEliminarMuseo">
+                                    Delete <i class="fas fa-trash-alt"></i>
+                                </button>
+                                <div class="modal fade" id="modalEliminarMuseo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">This museum has @item.ReservaOrganizaMuseo.Where(r => r.museo_id == item.id).Select(r => r.id).Count() booking/s,are you sure, you want to delete this museum?</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <a href="@Url.Action("EliminarMuseo","Lista", new { id = item.id })">
+                                                    <button type="button" class="btn btn-danger">Delete museum</button>
+                                                </a>
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                }
+                <a href="@Url.Action("CrearMuseo", "Crear")">
+                    <button type="button" class="btn btn-dark">
+                        Crear Museo <i class="fas fa-plus"></i>
+                    </button>
+                </a>
+            </div>
+        </div>
+    </div>
+</body>

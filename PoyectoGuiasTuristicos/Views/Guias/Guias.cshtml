@@ -1,0 +1,172 @@
+﻿@model PoyectoGuiasTuristicos.Models.AllModel
+@{
+    ViewBag.Title = "Guides";
+}
+<body style="margin-top:200px">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-8 text-center" id="perfil" style="margin-top:10px">
+                <div class="row">
+                    <div class="col-md-3 col-sm-6 col-12 text-center foto">
+                        <img class="fotousuario" src="~/Content/img/usuario.png">
+                    </div>
+                    <div class="col-md-7">
+                        <div class="row">
+                            <div class="col-12">
+                                @foreach (var item in Model.UsuarioModel)
+                                {
+                                    <div class="text-center" style="display: flex; flex-direction: row;justify-content:center">
+                                        <p class="nombre">@item.nombre.Substring(0, 1)@item.nombre.Substring(1)</p> <p class="nombre">&nbsp;@item.apellidos.Substring(0, 1)@item.apellidos.Substring(1)</p>
+                                    </div>
+                                    <p><strong>Contact:</strong> @item.correo</p>
+                                    if (item.descripcion != null)
+                                    {
+                                        <p><strong>Description: </strong>@item.descripcion</p>
+                                    }
+                                    if (int.Parse(@ViewData["valoracio"].ToString()) != 0 && ViewData["valoracio"] != null)
+                                    {
+                                        switch (int.Parse(@ViewData["valoracio"].ToString()) / 2)
+                                        {
+                                            case 1:<p><strong>Average Valuation: </strong><i class="fas fa-star fa-lg" style="color:#FFD500"></i></p>; break;
+                                            case 2:<p><strong>Average Valuation: </strong><i class="fas fa-star fa-lg" style="color:#FFD500"></i><i class="fas fa-star fa-lg" style="color:#FFD500"></i></p>; break;
+                                            case 3:<p><strong>Average Valuation: </strong><i class="fas fa-star fa-lg" style="color:#FFD500"></i><i class="fas fa-star fa-lg" style="color:#FFD500"></i><i class="fas fa-star fa-lg" style="color:#FFD500"></i></p>; break;
+                                            case 4:<p><strong>Average Valuation: </strong><i class="fas fa-star fa-lg" style="color:#FFD500"></i><i class="fas fa-star fa-lg" style="color:#FFD500"></i><i class="fas fa-star fa-lg" style="color:#FFD500"></i><i class="fas fa-star fa-lg" style="color:#FFD500"></i></p>; break;
+                                            case 5:<p><strong>Average Valuation: </strong><i class="fas fa-star fa-lg" style="color:#FFD500"></i><i class="fas fa-star fa-lg" style="color:#FFD500"></i><i class="fas fa-star fa-lg" style="color:#FFD500"></i><i class="fas fa-star fa-lg" style="color:#FFD500"></i><i class="fas fa-star fa-lg" style="color:#FFD500"></i></p>; break;
+                                        }
+                                    }
+                                    <p><strong>Language:</strong> @item.idioma</p>
+                                    if (@Session["id"] != null)
+                                    {
+                                        <button type="button" class="btn btn-dark mb-2" data-toggle="modal" data-target="#exampleModal">Rating</button>
+
+                                        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalLabel">Review: </h5>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+
+                                                        @using (Html.BeginForm("Guias", "Guias", FormMethod.Post))
+                                                        {
+                                                            <div class="form-group">
+                                                                <label for="message-text" class="col-form-label">User: @Session["nombre"]</label>
+                                                                @Html.TextAreaFor(m => m.valoracionModels.mensaje, new { @class = "form-control" })
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="recipient-name" class="col-form-label">Note: </label>
+                                                                @Html.TextBoxFor(m => m.valoracionModels.nota, new { htmlAttributes = new { @class = "form-control", @type = "number", @min = 0, @max = 10 } })
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                                <button type="submit" class="btn btn-primary">Send assessment</button>
+                                                            </div>
+                                                        }
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
+                                }
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-1 col-0"></div>
+            <div class="col-md-3 text-center" id="rutas" style="margin-top:10px">
+                <p class="title">TOURS</p>
+                <hr/>
+                @if (ViewData["norutas"] != null)
+                {
+                    <h5 style="color:grey">@ViewData["norutas"]</h5>
+                }
+                else
+                {
+                    foreach (var item in Model.RutaModel)
+                    {
+                        <div class="card">
+                            <p class="titulo">@item.lugar_quedada</p>
+                            <hr />
+                            <p>@item.precio €</p>
+                            <p>Places: @item.plazas</p>
+                            <a href="@Url.Action("Ruta", "Ruta", new { id = item.id })">
+                                Tour <i class="fas fa-info-circle fa-lg"></i>
+                            </a>
+                        </div>
+                    }
+                }
+
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-8" id="valoraciones" style="margin-top:30px">
+                <div class="row">
+                    <div class="col-12 text-center title">RATINGS</div>
+                    <hr/>
+                    @if (ViewData["novaloracion"] != null)
+                    {
+                        <div class="col-12 text-center" style="color:grey"><h5>@ViewData["novaloracion"]</h5></div>
+                    }
+                    else
+                    {
+                        foreach (var item in Model.ValoracionModel)
+                        {
+                            <div class="col-1"></div>
+                            <div class="col-md-10 bg-white valoracion">
+                                <div class="row">
+                                    <div class="col-3">
+                                        <img style="width:100px;margin-top:10px" src="~/Content/img/usuario.png" />
+                                    </div>
+                                    <div class="col-1"></div>
+                                    <div class="col-8">
+                                        <h6> @item.Usuario.nombre_usuario</h6>
+                                        <p><strong>Opinion:</strong> @item.mensaje </p>
+                                        <p><strong>Note:</strong> @item.nota </p>
+                                    </div>
+                                </div>
+                                <hr />
+                            </div>
+                            <div class="col-1"></div>
+                        }
+                    }
+                </div>
+            </div>
+            <div class="col-md-1"></div>
+            <div class="col-md-3 text-center" id="museos" style="margin-top:30px">
+                <p class="title"> MUSEUMS</p>
+                <hr/>
+                @if (ViewData["nomuseo"] != null)
+                {
+                    <h5 style="color:grey">@ViewData["nomuseo"]</h5>
+                }
+                else
+                {
+                    foreach (var item in Model.MuseoModel)
+                    {
+                        <div class="card text-center">
+                            <p class="titulo">@item.nombre</p>
+                            <hr />
+                            <p>@item.precio €</p>
+                            <p>Places: @item.plazas</p>
+                            <a href="@Url.Action("Museo", "Museo", new { id = item.id })">
+                                Museum <i class="fas fa-info-circle fa-lg"></i>
+                            </a>
+                        </div>
+                    }
+                }
+            </div>
+            <div class="col-md-1 col-0"></div>
+        </div>
+        <div class="col-md-3 col-md-offset-9 borde rutmus">
+
+        </div>
+    </div>
+</body>
+

@@ -1,0 +1,56 @@
+﻿@model PoyectoGuiasTuristicos.Models.Museo
+@{
+    ViewBag.Title = "Create Museum";
+}
+<body style="margin-top:200px">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-4 col-sm-2 col-0"></div>
+            <div class=" col-md-4 col-sm-8 col-12 text-center">
+                <h3 class="text-center">Create Route</h3>
+                <hr />
+                @using (Html.BeginForm("CrearMuseo", "Crear", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+                    <h5>Hangout: </h5>
+                    @Html.TextBoxFor(model => model.nombre, new { @class = "form-control col-12", @required = "required" })
+                    @Html.ValidationMessageFor(model => model.nombre, "", new { @class = "text-danger" })
+                    <br />
+                    <h5> Starting Date and Time: </h5>
+                    @Html.TextBoxFor(model => model.fechaInicio, new { @class = "form-control col-12", @required = "required", @type = "datetime-local" })
+                    @Html.ValidationMessageFor(model => model.fechaInicio, "", new { @class = "text-danger" })
+                    <br />
+                    <h5>Ending Date and Time: </h5>
+                    @Html.TextBoxFor(model => model.fechaFin, new { @class = "form-control col-12", @required = "required", @type = "datetime-local" })
+                    @Html.ValidationMessageFor(model => model.fechaFin, "", new { @class = "text-danger" })
+                    <br />
+                    <h5>City: </h5>
+                    @Html.DropDownList("ciudades", ViewBag.ciudades as List<SelectListItem>, new { @class = "form-control col-12", @required = "required" })
+                    <br />
+                    <h5>Price: </h5>
+                    @Html.TextBoxFor(model => model.precio, new { @class = "form-control col-12", @required = "required", @type = "number" })
+                    @Html.ValidationMessageFor(model => model.precio, "", new { @class = "text-danger" })
+                    <br />
+                    <h5>Places: </h5>
+                    @Html.TextBoxFor(model => model.plazas, new { @class = "form-control col-12", @required = "required", @type = "number" })
+                    @Html.ValidationMessageFor(model => model.plazas, "", new { @class = "text-danger" })
+                    <br />
+                    <h5>Photography: </h5>
+                    @Html.TextBoxFor(model => model.fotografia, new { @class = "form-control col-12", @required = "required", @type = "file" })
+                    @Html.ValidationMessageFor(model => model.plazas, "", new { @class = "text-danger" })
+                    <br />
+                    <br />
+                    <button type="submit" class="btn btn-primary col-12 ">Save</button>
+                    if (ViewData["nuevomuseo"] != null)
+                    {
+                        <div class="col-12 alert alert-success text-center" style="margin-top:10px" role="alert">
+                            @ViewData["nuevomuseo"]
+                        </div>
+                    }
+                }
+            </div>
+            <div class="col-md-2 col-sm-2 col-0"></div>
+        </div>
+    </div>
+</body>
+

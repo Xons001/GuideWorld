@@ -1,0 +1,160 @@
+﻿@model PoyectoGuiasTuristicos.Models.AllModel
+@{
+    ViewBag.Title = "Guias Turisticos";
+}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<body style="margin-top:200px">
+    <div class="container" id="principal">
+        <div class="row">
+            <div class="col-md-3 bg-light " id="recomended" style="z-index:99;">
+                <div class="title">RECOMMENDED GUIDES</div>
+                <hr />
+                <div class="col-sm-12">
+                    <div class="cards">
+                        @foreach (var item in Model.UsuarioModel)
+                        {
+                            <div class="card">
+                                <div class="card-header" style="width:100%">
+                                    <img class="card-img-top" style="width:70px" src="~/Content/img/usuario.png" />
+                                </div>
+                                <h6 class="card-summary" style="color:black">
+                                    @item.nombre @item.apellidos
+                                </h6>
+                                @if (@item.descripcion != null)
+                                {
+                                    <p class="card-summary" style="color:black">
+                                        @item.descripcion
+                                    </p>
+                                }
+                                else
+                                {
+                                    <p class="card-summary" style="color:black">
+                                        Description no available
+                                    </p>
+                                }
+                                <a href="@Url.Action("Guias", "Guias", new { id = item.id })">
+                                    <i class="fas fa-info-circle"></i>
+                                </a>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-1"></div>
+            <div class="col-md-8 bg-white rutas" style="height:360px;">
+                <p class="title">MOST POPULAR ROUTES</p>
+                <hr />
+                <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                    <div class="carousel-inner">
+                        @{
+                            int i = 0;
+                        }
+                        @foreach (var item in Model.RutaModel)
+                        {
+                            if (i == 0)
+                            {
+                                <div class="carousel-item active" data-duration="1500">
+                                    <a href="@Url.Action("Ruta","Ruta", new {item.id})" class="text-white">
+                                        <div class="col-lg-12 rute" style="background-image: url(@item.fotografia)">
+                                            <div class="col-lg-12">
+                                                <div class="front">
+                                                    <h5 class="text-capitalize">@item.lugar_quedada</h5>
+                                                    <p>@item.descripcion</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                                i++;
+                            }
+                            else
+                            {
+                                <div class="carousel-item" data-duration="1500">
+                                    <a href="@Url.Action("Ruta","Ruta", new {item.id})" class="text-white">
+                                        <div class="col-lg-12 rute" style="background-image: url(@item.fotografia)">
+                                            <div class="col-lg-12">
+                                                <div class="front">
+                                                    <h5 class="text-white text-capitalize">@item.lugar_quedada</h5>
+                                                    <p class="text-white">@item.descripcion</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            }
+                        }
+                    </div>
+                    <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </div>
+            </div>
+            </div>
+            <hr />
+            <div class="row" style="margin-top:-340px;">
+                <div class="col-md-4 col-0" style="z-index:1;"></div>
+                <div class="col-md-8 col-12 bg-white text-center museos">
+                    <p class="title">MOST POPULAR MUSEUMS/MONUMENTS</p>
+                    <div id="carouselExample" class="carousel slide" data-ride="carousel">
+                        <div class="carousel-inner">
+                            @{
+                                int j = 0;
+                            }
+                            @foreach (var item in Model.MuseoModel)
+                            {
+                                if (j == 0)
+                                {
+                                    <div class="carousel-item active" data-duration="1500">
+                                        <a href="@Url.Action("Museo","Museo",new {item.id})" class="text-white">
+                                            <div class="col-lg-12 rute" style="background-image: url(@item.fotografia)">
+                                                <div class="col-lg-12">
+                                                    <div class="front">
+                                                        <h5 class="text-white text-capitalize">@item.nombre</h5>
+                                                        <p class="text-white text-capitalize">@item.Ciudad.nombre, @item.Ciudad.Pais.nombre</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    j++;
+                                }
+                                else
+                                {
+                                    <div class="carousel-item" data-duration="1500">
+                                        <a href="@Url.Action("Museo","Museo",new {item.id})" class="text-white">
+                                            <div class="col-lg-12 rute" style="background-image: url(@item.fotografia)">
+                                                <div class="col-lg-12">
+                                                    <div class="front">
+                                                        <h5>@item.nombre</h5>
+                                                        <p class="text-white text-capitalize">@item.Ciudad.nombre, @item.Ciudad.Pais.nombre</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                }
+                            }
+                        </div>
+                        <a class="carousel-control-prev" href="#carouselExample" role="button" data-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="carousel-control-next" href="#carouselExample" role="button" data-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+</body>
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/bootstrap")
+<script>
+    $('.carousel').carousel()
+</script>

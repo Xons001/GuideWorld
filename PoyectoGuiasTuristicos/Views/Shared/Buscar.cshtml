@@ -1,0 +1,60 @@
+﻿@model PoyectoGuiasTuristicos.Models.AllModel
+@{
+    ViewBag.Title = "Buscar";
+}
+
+<body style="margin-top:200px">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-1"></div>
+            <div class="col-md-4 text-center bg-white" style="border:2px solid black;">
+                <p class="title">TOURS</p>
+                <hr />
+                @if (ViewData["norutas"] != null)
+                {
+                    <h6 style="color:grey;text-align:center">@ViewData["norutas"]</h6>
+                }
+                @foreach (var item in Model.RutaModel)
+                {
+                    <div class="card">
+                        <h6  class="text-capitalize">@item.lugar_quedada</h6>
+                        <hr/>
+                        <p>@item.precio €</p>
+                        <p>Places: @item.plazas</p>
+                        <p>Date: @item.fechaInicio.ToString().Substring(0, 10)</p>
+                        <a href="@Url.Action("Ruta", "Ruta", new { id = item.id })">
+                            Tour <i class="fas fa-info-circle"></i>
+                        </a>
+                    </div>
+                }
+            </div>
+            <div class="col-1"></div>
+            <div class="col-md-4 text-center bg-white" style="border:2px solid black;margin-top:20px;">
+                <p class="title"> MUSEUMS</p>
+                <hr />
+                @if (ViewData["nomuseos"] != null)
+                {
+                    <h6 style="color:grey;text-align:center">@ViewData["nomuseos"]</h6>
+                }
+                else
+                {
+                    foreach (var item in Model.MuseoModel)
+                    {
+                        <div class="card text-center">
+                            <h6 class="text-capitalize">@item.nombre</h6>
+                            <hr/>
+                            <p>@item.precio €</p>
+                            <p>Places: @item.plazas</p>
+                            <p>Date: @item.fechaInicio.ToString().Substring(0, 10)</p>
+                            <a href="@Url.Action("Museo", "Museo", new { id = item.id })">
+                                Museo <i class="fas fa-info-circle"></i>
+                            </a>
+                        </div>
+                    }
+                }
+
+            </div>
+            <div class="col-1"></div>
+        </div>
+    </div>
+</body>

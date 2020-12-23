@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="5e77d6789ab84352b7d448a487f55601" Name="Diagram1">
+        <EntityTypeShape EntityType="dbGuiasTuristicosModel.Ciudad" Width="1.5" PointX="3.75" PointY="3.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbGuiasTuristicosModel.Museo" Width="1.5" PointX="3" PointY="6.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbGuiasTuristicosModel.Pais" Width="1.5" PointX="1.5" PointY="3.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbGuiasTuristicosModel.ReservaOrganizaMuseo" Width="1.5" PointX="5.25" PointY="10.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbGuiasTuristicosModel.ReservaOrganizaRuta" Width="1.5" PointX="6" PointY="7.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbGuiasTuristicosModel.Ruta" Width="1.5" PointX="6" PointY="2.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbGuiasTuristicosModel.Usuario" Width="1.5" PointX="0.75" PointY="6.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbGuiasTuristicosModel.Valoracion" Width="1.5" PointX="3" PointY="18.125" IsExpanded="true" />
+        <AssociationConnector Association="dbGuiasTuristicosModel.fk_Ciudad_Pais" ManuallyRouted="false" />
+        <AssociationConnector Association="dbGuiasTuristicosModel.fk_Museo_Ciudad" ManuallyRouted="false" />
+        <AssociationConnector Association="dbGuiasTuristicosModel.fk_Ruta_Ciudad" ManuallyRouted="false" />
+        <AssociationConnector Association="dbGuiasTuristicosModel.fk_Museo_Guia" ManuallyRouted="false" />
+        <AssociationConnector Association="dbGuiasTuristicosModel.fk_ReservaOrganizaMuseo_Museo" ManuallyRouted="false" />
+        <AssociationConnector Association="dbGuiasTuristicosModel.fk_ReservaOrganizaMuseo_Usuario" ManuallyRouted="false" />
+        <AssociationConnector Association="dbGuiasTuristicosModel.fk_ReservaOrganizaRuta_Ruta" ManuallyRouted="false" />
+        <AssociationConnector Association="dbGuiasTuristicosModel.fk_ReservaOrganizaRuta_Usuario" ManuallyRouted="false" />
+        <AssociationConnector Association="dbGuiasTuristicosModel.fk_Ruta_Guia" ManuallyRouted="false" />
+        <AssociationConnector Association="dbGuiasTuristicosModel.fk_Valoracion_Usuario" ManuallyRouted="false" />
+        <AssociationConnector Association="dbGuiasTuristicosModel.fk_Valoracion_UsuarioGuia" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

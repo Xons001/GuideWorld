@@ -1,0 +1,188 @@
+﻿body {
+    background-color: #F0EFEC;
+}
+
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+/*Inicio Nav*/
+.border-radius-20 {
+    border-radius: 20px;
+}
+
+.tamano-logo {
+    height: 120px;
+    width: 120px;
+}
+
+.w-90 {
+    width: 90%;
+}
+/*Fin Nav*/
+/*Pagina principal*/
+.row #recomended, .rutas {
+    text-align: center;
+    margin-bottom:20px;
+}
+.rutas, .museos {
+    border: 1px solid black;
+}
+
+.row #recomended {
+    height: 675px;
+    border: 1px solid black;
+    box-shadow: 0px 10px 5px grey;
+    overflow-y: auto;
+}
+#row .rutas {
+    height: auto;
+}
+#principal {
+    position: relative;
+}
+.card-header {
+    background-color: #B5B5B5
+}
+.rute {
+    width: 100%;
+    margin-top: 5px;
+    height: 250px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    border-radius: 10px;
+    padding-top: 5%;
+}
+
+    .rute h5 {
+        color: white;
+    }
+
+.front {
+    background-color: rgba(0,0,0,0.5);
+    border-radius: 10px;
+}
+/*Guia más visitados*/
+.title {
+    margin-top: 5px;
+    color: black;
+    font-size: 25px;
+    font-family: Georgia;
+    text-shadow: 2px 2px lightgrey;
+}
+
+.checked {
+    color: orange;
+    display: inline;
+}
+
+.unchecked {
+    color: grey;
+    display: inline;
+}
+/*View perfil guia*/
+.row #perfil, #rutas, #valoraciones, #museos {
+    border: 2px outset black;
+    background-image: linear-gradient(white,lightgrey);
+}
+#rutas {
+    height: 225px;
+    overflow-y: scroll;
+}
+#valoraciones, #museos {
+    overflow-y: auto;
+    height: 250px
+}
+.valoracion {
+    margin-top: 20px;
+}
+.fotousuario {
+    width: 150px;
+    border-radius: 100px;
+    margin-top: 10px;
+    margin-left: 10px;
+}
+
+#foto {
+    padding-top:20px;
+    margin-top: 5px;
+    border-right: 2px solid darkgrey;
+}
+.card{
+    margin-bottom:10px;
+}
+.titulo{
+    margin-bottom:-10px;
+    font-size:20px;
+}
+.nombre::first-letter {
+    font-size: 30px;
+}
+/*View Ruta*/
+.inforuta, .infoGuia{
+    border: 2px solid black;
+    padding:20px;
+    margin-top:20px;
+}
+
+#reservas {
+    margin-top:20px;
+}
+.descripcionRuta{
+    color:black;
+}
+.descripcionRuta::first-letter{
+    font-size:30px;
+}
+@media screen and (max-width: 992px) {
+    .certificado {
+        margin-top:30px !important;
+    }
+    .title{
+        font-size:20px;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .collapse{
+        width:200px !important;
+    }
+    .user{
+        float:right;
+        margin-top:-70px;
+    }
+    .button{
+        margin-top:30px;
+        float:left;
+    }
+    .tamano-logo{
+        margin-right:70px;
+        margin-top:-10px;
+        margin-bottom:-20px;
+    }
+    #botonLogin{
+        float:right;
+        margin-top:-100px;
+    }
+    #botonRegister {
+        float: right;
+        margin-top: -50px;
+    }
+    .museos{
+        margin-top:320px;
+    }
+    #recomended{
+        height:150px;
+    }
+    .fotousuario{
+        width:80px;
+    }
+
+}
+.text-white{
+    text-decoration-line:none !important;
+}
+

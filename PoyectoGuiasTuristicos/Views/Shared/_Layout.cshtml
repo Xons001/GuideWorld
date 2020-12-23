@@ -1,0 +1,140 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guide World</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="icon" href="~/Content/img/logo1.png">
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <nav class="container-fluid sticky-top bg-dark" id="sombra" style="margin-top:-260px;margin-bottom:100px;">
+        <div class="row" id="divTitulo">
+            <div class="col-md-3"></div>
+            <div class="col-md-6 col-md-offset-3 col-12">
+                <h2 class="text-center text-info"><a href="@Url.Action("Index","Home")"><img src="~/Content/img/logo1.png" class=" rounded-circle tamano-logo" alt="logo"></a><button onclick="mostrarMenu();" id="viewSearch" class="ml-3 btn navbar-toggler-icon text-light border button"style="width:50px;height: 50px;"><i class="fas fa-long-arrow-alt-down"></i><i class="fas fa-long-arrow-alt-up"></i></button></h2>
+            </div>
+            @if (Session["nombre"] == null)
+            {
+                <div class="col-md-3 pt-2 text-center" style="margin-bottom:5px">
+                    <a href="@Url.Action("Register", "Register")">
+                        <button type="button" id="botonRegister"class="btn btn-outline-info pl-2 border-radius-20">
+                            <i class="fa fa-user-plus text-light mr-1"></i>Sign up
+                        </button>
+                    </a>
+                    <a href="@Url.Action("Login", "Login")">
+                        <button type="button" id="botonLogin" class="btn btn-outline-info border-radius-20">
+                            <i class="fa fa-user text-light mr-1"></i>Sign in
+                        </button>
+                    </a>
+                </div>
+            }
+            else
+            {
+                <div class="col-md-3 pt-2 text-center">
+                    <div class="dropdown">
+                        <button class="btn btn-outline-info border-radius-20 dropdown-toggle user" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fa fa-user text-light mr-1"></i>
+                            @Session["nombre"]
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="@Url.Action("EditarPerfil", "Login", new { session = Session["id"]})">
+                                Modify profile <i class="fas fa-user-edit"></i>
+                            </a>
+                            @if (Session["tipousuario"].Equals(true))
+                            {
+                                <a class="dropdown-item" href="@Url.Action("Lista", "Lista", new {id = Session["id"].ToString()})">
+                                    My activity <i class="far fa-calendar-alt"></i>
+                                </a>
+                            }
+                            else
+                            {
+                                <a class="dropdown-item" href="@Url.Action("Reservas", "Reservas", new { session = Session["id"]})">
+                                    Reservations <i class="far fa-calendar-alt"></i>
+                                </a>
+                            }
+                            <a class="dropdown-item" href="@Url.Action("Logout", "Login", new { session = Session["id"]})">
+                                Logout <i class="fas fa-sign-out-alt"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+        @using (Html.BeginForm("Buscar", "Login", FormMethod.Post, new { id = "form" }))
+        {
+            <div class="container" id="divMenu">
+                <div class="row p-1">
+                    <div class="col-lg-4 p-1 text-center">
+                        <i class="fa fa-calendar-plus text-info"></i>
+                        <input type="date" name="fecha" id="fecha" value="0" class="form-control-sm border-0 border-radius-20 w-90" />
+                    </div>
+                    <div class="col-sm-3 p-1 text-center">
+                        <i class="fa fa-globe-europe text-info"></i>
+                        @Html.DropDownList("paises", ViewBag.country as List<SelectListItem>, new { @class = "form-control-sm border-0 border-radius-20 w-90" })
+                    <div class="alert alert-danger" role="alert" id="selectalgo" style="display: none; margin-top: 5px;">Select something to filter</div>
+                    </div>
+                    <div class="col-sm-3 p-1 text-center">
+                        <i class="fa fa-building text-info"></i>
+                        @Html.DropDownList("ciudades", new SelectList(string.Empty, "Value", "Text"), "--Select city--", new { @class = "form-control-sm border-0 border-radius-20 w-90" })
+                    <div class="alert alert-danger" role="alert" id="selectciu" style="display: none; margin-top: 5px;">Select a city, please</div>
+                    </div>
+                    <div class="col-sm-2 p-1 text-center">
+                        <button type="submit" class="btn btn-outline-info border-radius-20">
+                            Search
+                        </button>
+                    </div>
+                </div>
+            </div>
+        }
+    </nav>
+    <div class="container body-content">
+        @RenderBody()
+        <footer>
+            <p>&copy; @DateTime.Now.Year - Guide World</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+    <script src="~/Scripts/BotonLayout.js"></script>
+    <script src="https://use.fontawesome.com/releases/v5.15.1/js/all.js" data-auto-replace-svg="nest"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+</body>
+</html>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#paises").change(function () {
+            $("#ciudades").empty();
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("getCiudad","Home")',
+                dataType: 'json',
+                data: { id: $("#paises").val() },
+                success: function (ciudades) {
+                    $.each(ciudades, function (i, ciudades) {
+                        $("#ciudades").append('<option value="' + ciudades.Value + '">' + ciudades.Text + '</option>');
+                    });
+                }
+            });
+            return false;
+        });
+        $("#form").submit(function (e) {
+            if ($("#fecha").val() == 0 && $("#paises").val() != 0 && $("#ciudades").val() == 0) {
+                e.preventDefault(e);
+                $("#selectciu").show().delay(5000).hide("slow");;
+            } else if ($("#fecha").val() == 0 && $("#paises").val() == 0 && $("#ciudades").val() == 0) {
+                e.preventDefault(e);
+                $("#selectalgo").show().delay(5000).hide("slow");;
+            }else if ($("#fecha").val() != 0 && $("#paises").val() != 0 && $("#ciudades").val() == 0) {
+                e.preventDefault(e);
+                $("#selectciu").show().delay(5000).hide("slow");;
+            }
+        });
+    });
+</script>

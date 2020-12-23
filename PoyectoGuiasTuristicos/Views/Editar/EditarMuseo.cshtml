@@ -1,0 +1,63 @@
+﻿@model PoyectoGuiasTuristicos.Models.Museo
+@{
+    ViewBag.Title = "Modify Museum";
+}
+
+<body style="margin-top:200px">
+    <div class="container-fluid">
+        <h2 class="text-center"> Modify Museum: @Model.nombre</h2>
+        <hr />
+        <div class="row">
+            <div class="col-md-4 col-sm-2 col-0"></div>
+            <div class="col-md-4 col-sm-8 col-12">
+                @using (Html.BeginForm("EditarMuseo", "Editar", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+
+                    <h5>City: @Model.Ciudad.nombre</h5>
+                    <br />
+                    <h5>Name:</h5>
+                    @Html.EditorFor(model => model.nombre, new { htmlAttributes = new { @class = "form-control col-12", @required = "required"} })
+                    @Html.ValidationMessageFor(model => model.nombre, "", new { @class = "text-danger" })
+                    <br />
+                    <h5>Starting Date and Time:</h5>
+                    @Html.EditorFor(model => model.fechaInicio, new { htmlAttributes = new { @class = "form-control col-12", @required = "required", @type = "datetime-local" } })
+                    @Html.ValidationMessageFor(model => model.fechaInicio, "", new { @class = "text-danger" })
+                    <br />
+                    <h5>Ending Date and Time:</h5>
+                    @Html.EditorFor(model => model.fechaFin, new { htmlAttributes = new { @class = "form-control col-12", @required = "required", @type= "datetime-local" } })
+                    @Html.ValidationMessageFor(model => model.fechaFin, "", new { @class = "text-danger" })
+                    <br />
+                    <h5>Price:</h5>
+                    @Html.EditorFor(model => model.precio, new { htmlAttributes = new { @class = "form-control col-12", @required = "required", @type="number"} })
+                    @Html.ValidationMessageFor(model => model.precio, "", new { @class = "text-danger" })
+                    <br />
+                    <h5>Places:</h5>
+                    @Html.EditorFor(model => model.plazas, new { htmlAttributes = new { @class = "form-control col-12", @required = "required", @type="number"} })
+                    @Html.ValidationMessageFor(model => model.plazas, "", new { @class = "text-danger" }) 
+                    <br/>
+                    <h5>Photography:</h5>
+                    @Html.EditorFor(model => model.fotografia, new { htmlAttributes = new { @class = "form-control col-12", @type="file"} })
+                    @Html.ValidationMessageFor(model => model.fotografia, "", new { @class = "text-danger" })
+                    <br />
+                    <button type="submit" class="btn btn-primary col-12 "> Save</button>
+                    if (ViewData["noeditar"] != null)
+                    {
+                        <div class="col-12 alert alert-danger text-center" role="alert" style="margin:10px 0 10px 0">
+                            @ViewData["noeditar"]
+                        </div>
+                    }
+                    if (ViewData["modificado"] != null)
+                    {
+                        <div class="col-12 alert alert-success text-center" role="alert" style="margin:10px 0 10px 0">
+                            @ViewData["modificado"]
+                        </div>
+                    }
+                }
+            </div>
+            <div class="col-md-4 col-sm-2 col-0"></div>
+
+        </div>
+    </div>
+</body>
+

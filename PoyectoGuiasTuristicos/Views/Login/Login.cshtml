@@ -1,0 +1,53 @@
+﻿@model PoyectoGuiasTuristicos.Models.Usuario
+@{
+    Layout = null;
+}
+@{
+    ViewBag.Title = "Login";
+}
+@Styles.Render("~/Content/css")
+@using (Html.BeginForm("Login", "Login", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    <body style="background-color: #E8E6E6">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-4 col-0"></div>
+                <div class="col-md-4 col-12">
+                    <div class="row">
+                        <div class="col-1"></div>
+                        <div class="col-md-4 col-12 text-center">
+                            <a href="@Url.Action("Index","Home")">
+                                <img src="~/Content/img/logo1.png" style="width:300px;" />
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 col-0"></div>
+                <div class="col-md-4 col-12">
+                    <form action="" method="POST">
+                        @Html.TextBoxFor(a => a.correo, new { placeholder = "Mail", @class = "form-control col-12", @required = "required", @type="email" })
+                        @Html.ValidationMessageFor(a => a.correo)
+                        <br />
+                        @Html.PasswordFor(a => a.contrasenya, new { placeholder = "Password", @class = "form-control col-12", @required = "required", @type = "password" })
+                        @Html.ValidationMessageFor(a => a.contrasenya)
+                        <br />
+                        <button class="btn btn-lg btn-outline-primary btn-block col-12" type="submit"><i class="fa fa-sign-in"></i>Login</button>
+                    </form>
+                    @if (ViewBag.Error != null)
+                    {
+                        <div class="alert alert-danger text-center" role="alert">
+                            @ViewBag.error
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </body>
+}
+

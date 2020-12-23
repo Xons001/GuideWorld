@@ -1,0 +1,64 @@
+﻿@model PoyectoGuiasTuristicos.Models.Usuario
+@{
+    Layout = null;
+}
+@{
+    ViewBag.Title = "Sign Up";
+}
+@Styles.Render("~/Content/css")
+@using (Html.BeginForm("Register", "Register", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    <body style="background-color: #E8E6E6">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-4 col-0"></div>
+                <div class="col-md-4 col-12 text-center">
+                    <img src="~/Content/img/logo1.png" style="width:300px" />
+                </div>
+            <div class="col-md-4 col-0"></div>
+        </div>
+        <div class="row">
+            <div class="col-md-4 col-0"></div>
+            <div class="col-md-4 col-12">
+                @using (Html.BeginForm("Register", "Register", FormMethod.Post))
+                {
+                    @Html.TextBoxFor(a => a.correo, new { placeholder = "Mail", @class = "form-control col-12", @type="email" })
+                    @Html.ValidationMessageFor(a => a.correo)
+                    <br />
+                    @Html.PasswordFor(a => a.contrasenya, new { placeholder = "Password", @class = "form-control col-12", @type="password" })
+                    @Html.ValidationMessageFor(a => a.contrasenya)
+                    <br />
+                    @Html.TextBoxFor(a => a.nombre_usuario, new { placeholder = "User Name", @class = "form-control col-12" })
+                    @Html.ValidationMessageFor(a => a.nombre_usuario)
+                    <br />
+                    @Html.TextBoxFor(a => a.nombre, new { placeholder = "Name", @class = "form-control col-12" })
+                    @Html.ValidationMessageFor(a => a.nombre)
+                    <br />
+                    @Html.TextBoxFor(a => a.apellidos, new { placeholder = "Last Name", @class = "form-control col-12" })
+                    @Html.ValidationMessageFor(a => a.apellidos)
+                    <br />
+                    @Html.TextBoxFor(a => a.idioma, new { placeholder = "Language", @class = "form-control col-12" })
+                    @Html.ValidationMessageFor(a => a.idioma)
+                    <br />
+                    <div class="form-control col-12 text-center bg-transparent border-0" style="font-size:20px;color:grey">
+                        Tourist @Html.RadioButtonFor(a => a.tipoUsuario, false, new { @checked = true })
+                        <br />
+                        Guide @Html.RadioButtonFor(a => a.tipoUsuario, true)
+                    </div>
+                    <br />
+                    <button class="btn btn-lg btn-outline-primary btn-block col-12" type="submit"><i class="fa fa-sign-in"></i>Sign Up</button>
+                    if (ViewBag.Error != null)
+                    {
+                        <div class="alert alert-danger text-center" role="alert">
+                            @ViewBag.error
+                        </div>
+                    }
+                }
+            </div>
+        </div>
+        </div>
+    </body>
+}
+

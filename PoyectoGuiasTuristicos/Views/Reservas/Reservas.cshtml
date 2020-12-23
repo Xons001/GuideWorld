@@ -1,0 +1,42 @@
+﻿@model PoyectoGuiasTuristicos.Models.AllModel
+@{
+    ViewBag.Title = "Reservas";
+}
+<body style="margin-top: 200px;">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-4 text-center" style="border:2px solid black; border-radius:10px; background-color:white;">
+                <p class="title">ROUTES</p>
+                @foreach (var item in Model.RutaModel)
+                {
+                    <div class="card">
+                        <h6>@item.lugar_quedada</h6>
+                        <p>Starting Date: @item.fechaInicio.ToString().Substring(0,10)</p>
+                        <p>Starting Hour: @item.fechaInicio.ToString().Substring(10)</p>
+                        <a href="@Url.Action("Ruta", "Ruta", new { id = item.id })">
+                            Route <i class="fas fa-info-circle"></i>
+                        </a>
+                    </div>
+                }
+            </div>
+            <div class="col-md-1"></div>
+            <div class="col-md-4 text-center" style="border:2px solid black; border-radius:10px; background-color:white;">
+                <p class="title">MUSEUMS</p>
+                @foreach (var item in Model.MuseoModel)
+                {
+                    <div class="card">
+                        <h6>@item.nombre</h6>
+                        <p>Starting Date: @item.fechaInicio.ToString().Substring(0,10)</p>
+                        <p>Starting Hour: @item.fechaInicio.ToString().Substring(10)</p>
+                        <a href="@Url.Action("Museo", "Museo", new { id = item.id })">
+                            Museum <i class="fas fa-info-circle"></i>
+                        </a>
+                    </div>
+                }
+            </div>
+            <div class="col-md-1"></div>
+        </div>
+    </div>
+</body>
+

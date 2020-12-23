@@ -1,0 +1,86 @@
+﻿@model PoyectoGuiasTuristicos.Models.Usuario
+
+@{
+    ViewBag.Title = "EditarPerfil";
+}
+
+<body style="margin-top:200px">
+    @using (Html.BeginForm("EditarPerfil", "Login", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-4 col-sm-2 col-0"></div>
+                <div class="col-md-4 col-sm-8 col-12">
+                    <h2 class="text-center">Modify Profile</h2>
+                    <hr />
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    @Html.HiddenFor(model => model.id)
+
+                    <div class="form-group">
+                        <p class="control-label col-md-6"> Name </p>
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.nombre, new { htmlAttributes = new { @class = "form-control col-12" } })
+                            @Html.ValidationMessageFor(model => model.nombre, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <p class="control-label col-md-6"> Second Name</p>
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.apellidos, new { htmlAttributes = new { @class = "form-control col-12" } })
+                            @Html.ValidationMessageFor(model => model.apellidos, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <p class="control-label col-md-6"> User name</p>
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.nombre_usuario, new { htmlAttributes = new { @class = "form-control col-12" } })
+                            @Html.ValidationMessageFor(model => model.nombre_usuario, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <p class="control-label col-md-6"> Description</p>
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.descripcion, new { htmlAttributes = new { @class = "form-control col-12" } })
+                            @Html.ValidationMessageFor(model => model.descripcion, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <p class="control-label col-md-6"> Phone Number</p>
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.telf, new { htmlAttributes = new { @class = "form-control col-12" } })
+                            @Html.ValidationMessageFor(model => model.telf, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <p class="control-label col-md-6"> Language </p>
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.idioma, new { htmlAttributes = new { @class = "form-control col-12" } })
+                            @Html.ValidationMessageFor(model => model.idioma, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <br />
+                    @if (ViewData["modificado"] != null)
+                    {
+                        <div class="col-12 alert alert-success text-center" role="alert">
+                            @ViewData["modificado"]
+                        </div>
+                    }
+
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="Save" class="btn btn-default" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-2 col-0"></div>
+            </div>
+        </div>
+    }
+</body>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
